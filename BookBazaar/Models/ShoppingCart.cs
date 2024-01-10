@@ -32,6 +32,16 @@
         {
             CartItems[CartItems.FindIndex(i => i.BookId == item.BookId)] = item;
         }
+
+        public double CalculateTotalPrice()
+        {
+            double total = 0;
+            foreach (CartItem item in CartItems)
+            {
+                total += item.Quantity * item.Book.Price;
+            }
+            return total;
+        }
     }
     
 }
