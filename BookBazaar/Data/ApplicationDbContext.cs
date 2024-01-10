@@ -9,5 +9,8 @@ namespace BookBazaar.Data
             : base(options)
         {
         }
+
+        DbSet<BookBazaar.Models.Book> Books { get; set; }
+        DbSet<BookBazaar.Models.ShoppingCart> ShoppingCarts { get; set;}
     }
 }
