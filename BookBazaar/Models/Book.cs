@@ -20,6 +20,8 @@ namespace BookBazaar.Models
         public int Quantity { get; set; }
 
         public double Price { get; set; }
+
+        public byte[] Image { get; set; }
     
     }
 }
