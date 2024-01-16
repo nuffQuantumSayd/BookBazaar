@@ -10,7 +10,7 @@ namespace BookBazaar.Data
         {
         }
 
-        DbSet<BookBazaar.Models.Book> Books { get; set; }
-        DbSet<BookBazaar.Models.ShoppingCart> ShoppingCarts { get; set;}
+        public DbSet<BookBazaar.Models.Book> Books { get; set; }
+
     }
 }
