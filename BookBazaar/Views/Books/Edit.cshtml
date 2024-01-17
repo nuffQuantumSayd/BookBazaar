@@ -36,18 +36,10 @@
             <div class="form-group">
                 <label asp-for="Genre" class="control-label"></label>
                 <select asp-for="Genre" class="form-control">
-                    <option value="Fiction">Fiction</option>
-                    <option value="Non-Fiction">Non-Fiction</option>
-                    <option value="Fantasy">Fantasy</option>
-                    <option value="Mystery">Mystery</option>
-                    <option value="Romance">Romance</option>
-                    <option value="Thriller">Thriller</option>
-                    <option value="Horror">Horror</option>
-                    <option value="Sci-Fi">Sci-Fi</option>
-                    <option value="Children">Children</option>
-                    <option value="Biography">Biography</option>
-                    <option value="History">History</option>
-                    <option value="Other">Other</option>
+                    @*Uses the _GenreSelection partial for refactoring purposes
+                        Add new Genres to the drop down list in the partial
+                    *@
+                    <partial name="_GenreSelection" />
                 </select>
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
