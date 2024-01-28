@@ -35,7 +35,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Genre" class="control-label"></label>
-                <select asp-for="Genre" class="form-control"></select>
+                <select asp-for="Genre" class="form-control">
+                    @*Uses the _GenreSelection partial for refactoring purposes
+                        Add new Genres to the drop down list in the partial
+                    *@
+                    <partial name="_GenreSelection" />
+                </select>
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -64,27 +64,27 @@ namespace BookBazaar.Controllers
             {
                 // Generate a unique name for the image
                 string fileName = Guid.NewGuid().ToString();
-            fileName += Path.GetExtension(bookModel.BookPhoto.FileName);
+                fileName += Path.GetExtension(bookModel.BookPhoto.FileName);
 
-            // Save file to file system
-            string uploadPath = Path.Combine(_environment.WebRootPath, "Images", fileName);
-            using Stream fileStream = new FileStream(uploadPath, FileMode.Create);
-            await bookModel.BookPhoto.CopyToAsync(fileStream);
+                // Save file to file system
+                string uploadPath = Path.Combine(_environment.WebRootPath, "Images", fileName);
+                using Stream fileStream = new FileStream(uploadPath, FileMode.Create);
+                await bookModel.BookPhoto.CopyToAsync(fileStream);
 
-            // Map the view model to the data model (Book), save to the database
-            Book book = new Book
-            {
-                Title = bookModel.Title,
-                ISBN = bookModel.ISBN,
-                Author = bookModel.Author,
-                Description = bookModel.Description,
-                Genre = bookModel.Genre,
-                Quantity = bookModel.Quantity,
-                Price = bookModel.Price,
-                Image = fileName
-            };
+                // Map the view model to the data model (Book), save to the database
+                Book book = new Book
+                {
+                    Title = bookModel.Title,
+                    ISBN = bookModel.ISBN,
+                    Author = bookModel.Author,
+                    Description = bookModel.Description,
+                    Genre = bookModel.Genre,
+                    Quantity = bookModel.Quantity,
+                    Price = bookModel.Price,
+                    Image = fileName
+                };
 
-            
+                // Add the book to the database
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
