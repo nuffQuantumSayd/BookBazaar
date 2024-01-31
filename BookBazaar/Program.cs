@@ -1,4 +1,5 @@
 using BookBazaar.Data;
+using BookBazaar.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+// Registers the EFBookRepository service with the DI container.
+builder.Services.AddScoped<IBookRepository, EFBookRepository>();
 builder.Services.AddRazorPages();
 
 // Sets up  in-memory data store for session state.
