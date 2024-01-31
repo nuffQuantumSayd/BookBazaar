@@ -14,6 +14,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+// Sets up  in-memory data store for session state.
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,6 +36,9 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+// Sets up session state for the app.
+app.UseSession();
 
 app.UseRouting();
 
