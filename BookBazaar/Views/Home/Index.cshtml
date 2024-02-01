@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
+<a asp-page="/Cart">Go to Cart</a>
+<br />
 <a asp-controller="Books" asp-action="Index">Go to Books</a>
 
 @*
@@ -15,26 +16,11 @@
 
        Image 
 *@
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="card text-center col-sm-4" style="width:18rem;">
-            <img src="/Images/@item.Image" class="card-img-top" alt="Book Image">
-            <div class="card-body">
-                <h5 class="card-title">@item.Title</h5>
-                <!-- If quantity is 0 then display item out of stock, otherwise display in stock with quantity -->
-                @if (item.Quantity < 1)
-                {
-                    <p class="card-text">Out of Stock</p>
-                }
-                else
-                {
-                    <p class="card-text">In Stock: @item.Quantity</p>
-                }
-                <p class="card-text">$@item.Price</p>
-                <a href="#" class="btn btn-primary">Add to Cart</a>
-            </div>
-        </div>
-    }
-</div>
+@foreach(var b in Model)
+{
+    <div class="row">
+        <partial name="BookSummary" model="b" />
+    </div>
+    
+}
 
