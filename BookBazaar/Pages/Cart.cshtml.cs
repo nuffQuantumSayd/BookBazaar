@@ -33,11 +33,11 @@ namespace BookBazaar.Pages
         }
 
         // This method handles the POST request
-        public IActionResult OnPost(int bookId, string returnUrl)
+        public IActionResult OnPost(Book addedBook, string returnUrl)
         {
             // Get the book with the given bookId
             Book? book = repository.Books
-                .FirstOrDefault(b => b.Id == bookId);
+                .FirstOrDefault(b => b.Id == addedBook.Id);
 
             // If the book is not null, add the book to the cart in the session
             if (book != null)
