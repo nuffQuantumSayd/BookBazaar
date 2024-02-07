@@ -14,7 +14,7 @@
         {
             <p class="card-text">In Stock: @Model.Quantity</p>
         }
-        <p class="card-text">$@Model.Price</p>
+        <p class="card-text">@Model.Price.ToString("c")</p>
 
         @* <a href="#" class="btn btn-primary">Add to Cart</a> *@
         <!-- Add to cart button -->
