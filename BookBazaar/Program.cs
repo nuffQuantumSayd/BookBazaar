@@ -53,4 +53,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+// Seed the database with sample data.
+SeedData.PopulateBooks(app);
+
 app.Run();
