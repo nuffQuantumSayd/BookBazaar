@@ -11,6 +11,7 @@
             <th>Image</th>
             <th class="text-right">Price</th>
             <th class="text-right">Subtotal</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,18 @@
                 <td class="text-right">@line.Book.Price.ToString("c")</td>
                 <td class="text-right">
                     @((line.Quantity * line.Book.Price).ToString("c"))
+                </td>
+                <td class="text-center">
+                    <!-- Remove button -->
+                    <form asp-page-handler="Remove" method="post">
+                        <input type="hidden" name="BookId"
+                            value="@line.Book.Id"/>
+                        <input type="hidden" name="returnUrl"
+                            value="@Model?.ReturnUrl"/>     
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Remove
+                        </button>
+                    </form>
                 </td>
             </tr>
         }
