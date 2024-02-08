@@ -23,6 +23,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
+// Registers the Cart service with the DI container.
+builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+// Registers the IHttpContextAccessor service with the DI container.
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
 var app = builder.Build();
 
