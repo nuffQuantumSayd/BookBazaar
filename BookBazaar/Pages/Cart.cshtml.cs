@@ -11,9 +11,10 @@ namespace BookBazaar.Pages
         private IBookRepository repository;
 
         // This is the constructor for the CartModel
-        public CartModel(IBookRepository repo)
+        public CartModel(IBookRepository repo, Cart cartServicee)
         {
             repository = repo;
+            Cart = cartServicee;
         }
 
         // The Cart property
@@ -27,9 +28,6 @@ namespace BookBazaar.Pages
         {
             // If the returnUrl is not null, set the ReturnUrl property to the returnUrl
             ReturnUrl = returnUrl ?? "/";
-
-            // Set the Cart property to the cart in the session or a new cart
-            Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
         }
 
         // This method handles the POST request
@@ -42,14 +40,8 @@ namespace BookBazaar.Pages
             // If the book is not null, add the book to the cart in the session
             if (book != null)
             {
-                // Set the Cart property to the cart in the session or a new cart
-                Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
-
                 // Add the book to the cart
-                Cart.AddItem(book, 1);
-
-                // Set the cart in the session to the Cart property
-                HttpContext.Session.SetJson("cart", Cart);
+                Cart?.AddItem(book, 1);
             }
 
             // If the returnUrl is not null, return to the returnUrl
