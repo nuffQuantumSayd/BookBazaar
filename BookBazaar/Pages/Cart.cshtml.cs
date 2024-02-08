@@ -47,5 +47,15 @@ namespace BookBazaar.Pages
             // If the returnUrl is not null, return to the returnUrl
             return RedirectToPage(new { returnUrl = returnUrl });
         }
+
+        // This method handles the POST request
+        public IActionResult OnPostRemove(int bookId, string returnUrl)
+        {
+            // Remove the book with the given bookId from the cart in the session
+            Cart?.RemoveLine(Cart.Lines.First(cl =>
+            cl.Book.Id == bookId).Book);
+
+            return RedirectToPage(new { returnUrl = returnUrl });
+        }
     }
 }
