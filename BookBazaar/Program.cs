@@ -17,11 +17,17 @@ builder.Services.AddControllersWithViews();
 
 // Registers the EFBookRepository service with the DI container.
 builder.Services.AddScoped<IBookRepository, EFBookRepository>();
+builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
 builder.Services.AddRazorPages();
 
 // Sets up  in-memory data store for session state.
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
+
+// Registers the Cart service with the DI container.
+builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+// Registers the IHttpContextAccessor service with the DI container.
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
 var app = builder.Build();

@@ -8,7 +8,7 @@ namespace BookBazaar.Models
         public List<CartLine> Lines { get; set; } = new List<CartLine>();
 
         // AddItem method
-        public void AddItem(Book book, int quantity)
+        public virtual void AddItem(Book book, int quantity)
         {
             // Find the book in the cart
             CartLine? line = Lines
@@ -34,7 +34,7 @@ namespace BookBazaar.Models
         }
 
         // RemoveLine method
-        public void RemoveLine(Book book)
+        public virtual void RemoveLine(Book book)
         {
             Lines.RemoveAll(l => l.Book.Id == book.Id);
         }
@@ -46,7 +46,7 @@ namespace BookBazaar.Models
         }
 
         // Clear method
-        public void Clear()
+        public virtual void Clear()
         {
             Lines.Clear();
         }

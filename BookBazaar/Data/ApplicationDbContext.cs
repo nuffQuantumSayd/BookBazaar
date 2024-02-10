@@ -11,6 +11,7 @@ namespace BookBazaar.Data
         }
 
         public DbSet<BookBazaar.Models.Book> Books { get; set; }
+        public DbSet<BookBazaar.Models.Order> Orders { get; set; }
 
     }
 }
