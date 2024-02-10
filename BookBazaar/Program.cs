@@ -17,6 +17,7 @@ builder.Services.AddControllersWithViews();
 
 // Registers the EFBookRepository service with the DI container.
 builder.Services.AddScoped<IBookRepository, EFBookRepository>();
+builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
 builder.Services.AddRazorPages();
 
 // Sets up  in-memory data store for session state.
