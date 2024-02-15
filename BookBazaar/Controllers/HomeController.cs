@@ -3,6 +3,7 @@ using BookBazaar.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using X.PagedList;
 
 namespace BookBazaar.Controllers
 {
@@ -18,7 +19,7 @@ namespace BookBazaar.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index(string searchString)
+        public IActionResult Index(string currentFilter, string searchString, int? page)
         {   
             // If the database is empty, return a problem
             if (_context.Books == null)
@@ -27,8 +28,20 @@ namespace BookBazaar.Controllers
             }
 
             // If the search string is empty, return all books
-            var books = from b in _context.Books
+            IQueryable<Book> books = from b in _context.Books
                         select b;
+
+            // If the search string is not empty, return books that contain the search string
+            if(searchString != null)
+            {
+                page = 1;
+            }
+            // If the search string is empty, return all books
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
 
             // If the search string is not empty, return books that contain the search string
             if (!String.IsNullOrEmpty(searchString))
@@ -36,8 +49,16 @@ namespace BookBazaar.Controllers
                 books = books.Where(b => b.Title!.Contains(searchString));
             }
 
-            // Return the view with the books
-            return View(await books.ToListAsync());
+            // Set the page size and number
+            int pageSize = 4;
+
+            // Return the page number
+            int pageNumber = (page ?? 1);
+
+            // Return the view with the books 
+            IPagedList<Book> pagedBookList = books.ToPagedList(pageNumber, pageSize);
+
+            return View(pagedBookList);
         }
 
         public IActionResult Privacy()
