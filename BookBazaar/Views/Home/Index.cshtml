@@ -1,4 +1,7 @@
-﻿@model IEnumerable<BookBazaar.Models.Book>
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model PagedList<BookBazaar.Models.Book>
+
 
 @{
     ViewData["Title"] = "Home Page";
@@ -6,17 +9,6 @@
 <a asp-page="/Cart">Go to Cart</a>
 <br />
 <a asp-controller="Books" asp-action="Index">Go to Books</a>
-
-@*
-       Title 
-
-       Quantity 
-
-       Price
-
-       Image 
-*@
-
 
 <!-- Search form -->
 <form asp-controller="Home" asp-action="Index" method="get">
@@ -33,4 +25,33 @@
     }
 </div>
 
+<br>
 
+<!-- Pagination -->
+<div class="text-center">
+    <ul class="pagination">
+        <!-- First page -->
+        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">First</a>
+        </li>
+        <!-- Previous page -->
+        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">Previous</a>
+        </li>
+        <!-- Page numbers -->
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <li class="page-item @(Model.PageNumber == i ? "active" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = i, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">@i</a>
+            </li>
+        }
+        <!-- Next page -->
+        <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">Next</a>
+        </li>
+        <!-- Last page -->
+        <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">Last</a>
+        </li>
+    </ul>
+</div>
