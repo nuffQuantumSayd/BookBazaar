@@ -40,5 +40,8 @@ namespace BookBazaar.Models
 
         // This is the gift wrap
         public bool GiftWrap { get; set; }
+
+        [BindNever]
+        public bool Shipped { get; set; }
     }
 }
