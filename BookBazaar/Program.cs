@@ -29,6 +29,9 @@ builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 // Registers the IHttpContextAccessor service with the DI container.
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+// Registers the Order service with the DI container.
+builder.Services.AddServerSideBlazor();
+
 
 var app = builder.Build();
 
@@ -58,6 +61,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+// Adds the Blazor server-side middleware to the app.
+app.MapBlazorHub();
+app.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
 
 // Seed the database with sample data.
 SeedData.PopulateBooks(app);
