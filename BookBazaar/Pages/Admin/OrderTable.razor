@@ -4,14 +4,18 @@
         <tr><th colspan="5" class="text-center">@TableTitle</th></tr>
     </thead>
     <tbody>
-        @if(Orders?.Count() > 0)
+        @if (Orders?.Count() > 0)
         {
             @foreach (Order o in Orders)
             {
                 <tr>
-                    <td>@o.Name</td><td>@o.Zip</td><th>Book</th><th>Quantity</th>
+                    <td>@o.Name</td>
+                    <td>@o.Zip</td>
+                    <th>Product</th>
+                    <th>Quantity</th>
                     <td>
-                        <button class="btn btn-sm btn-danger" @onclick="@(e => OrderSelected.InvokeAsync(o.OrderId))">
+                        <button class="btn btn-sm btn-danger"
+                                @onclick="@(e => OrderSelected.InvokeAsync(o.OrderId))">
                             @ButtonLabel
                         </button>
                     </td>
@@ -20,13 +24,13 @@
                 {
                     <tr>
                         <td colspan="2"></td>
-                        <td>@line.Book.Title</td><td>@line.Quantity</td>
+                        <td>@line.Book.Title</td>
+                        <td>@line.Quantity</td>
                         <td></td>
                     </tr>
                 }
             }
-        } 
-        
+        }
         else
         {
             <tr><td colspan="5" class="text-center">No Orders</td></tr>
