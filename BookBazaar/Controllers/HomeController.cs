@@ -1,5 +1,6 @@
 using BookBazaar.Data;
 using BookBazaar.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -7,6 +8,7 @@ using X.PagedList;
 
 namespace BookBazaar.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
