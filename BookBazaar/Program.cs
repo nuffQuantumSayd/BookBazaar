@@ -97,6 +97,9 @@ app.UseSession();
 
 app.UseRouting();
 
+//Stripe Configuration
+Stripe.StripeConfiguration.ApiKey = app.Configuration.GetSection("Stripe:SecretKey").Get<string>();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
