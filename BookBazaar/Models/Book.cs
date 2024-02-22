@@ -10,19 +10,19 @@ namespace BookBazaar.Models
         public int Id { get; set; }
 
         // The Title of the book
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         // The ISBN of the book
-        public string ISBN { get; set; }
+        public string? ISBN { get; set; }
 
         // The Author of the book
-        public string Author { get; set; }
+        public string? Author { get; set; }
 
         // The Description of the book
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         // The Genre of the book
-        public string Genre { get; set; }
+        public string? Genre { get; set; }
 
         // The Quantity of the book
         public int Quantity { get; set; }
@@ -31,7 +31,7 @@ namespace BookBazaar.Models
         public double Price { get; set; }
 
         // The Image of the book
-        public string Image { get; set; }
+        public string? Image { get; set; }
     
     }
 
@@ -39,19 +39,19 @@ namespace BookBazaar.Models
     public class CreateBookViewModel
     {
         // The Title of the book
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         // The ISBN of the book
-        public string ISBN { get; set; }
+        public string? ISBN { get; set; }
 
         // The Author of the book
-        public string Author { get; set; }
+        public string? Author { get; set; }
 
         // The Description of the book
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         // The Genre of the book
-        public string Genre { get; set; }
+        public string? Genre { get; set; }
 
         // The Quantity of the book
         public int Quantity { get; set; }
@@ -60,6 +60,6 @@ namespace BookBazaar.Models
         public double Price { get; set; }
 
         // The Image of the book
-        public IFormFile BookPhoto { get; set; }
+        public IFormFile? BookPhoto { get; set; }
     }
 }
