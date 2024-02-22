@@ -1,20 +1,20 @@
 ﻿@model BookBazaar.Models.Book
 
 
-<div class="card text-center col-sm-4" style="width:18rem;">
-    <img src="/Images/@Model.Image" class="card-img-top" alt="Book Image">
+<div class="card text-center col-sm-4 m-3 p-4" style="width:18rem;">
+    <img src="/Images/@Model.Image" class="card-img-top p-1" style="height: 230px" alt="Book Image">
     <div class="card-body">
-        <h5 class="card-title">@Model.Title</h5>
+        <h5 class="card-title poppins-black">@Model.Title</h5>
         <!-- If quantity is 0 then display item out of stock, otherwise display in stock with quantity -->
         @if (Model.Quantity < 1)
         {
-            <p class="card-text">Out of Stock</p>
+            <p class="card-text poppins-regular" style="color:red">Out of Stock</p>
         }
         else
         {
-            <p class="card-text">In Stock: @Model.Quantity</p>
+            <p class="card-text poppins-regular">In Stock: @Model.Quantity</p>
         }
-        <p class="card-text">@Model.Price.ToString("c")</p>
+        <p class="card-text poppins-regular">@Model.Price.ToString("c")</p>
 
         @* <a href="#" class="btn btn-primary">Add to Cart</a> *@
         <!-- Add to cart button -->
@@ -22,14 +22,14 @@
             <input type="hidden" asp-for="@Model.Id" />
             <input type="hidden" name="returnUrl"
                     value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-            <span class="card-text p-1">
+            <span class="card-text p-1 poppins-regular truncate">
                 @Model.Description
                 <br />
-                <button type="submit"
-                        class="btn btn-success btn-sm ">
-                    Add To Cart
-                </button>
             </span>
+            <button type="submit"
+                    class="btn btn-success btn-sm ">
+                Add To Cart
+            </button>
         </form>
 
     </div>
