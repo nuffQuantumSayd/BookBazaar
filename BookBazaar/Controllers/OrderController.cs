@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BookBazaar.Models;
+using Stripe.Checkout;
 
 namespace BookBazaar.Controllers
 {
@@ -17,7 +18,7 @@ namespace BookBazaar.Controllers
 
         // This is the Completed method that returns the Completed view
         public ViewResult Checkout() => View(new Order());
-
+        
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
@@ -29,15 +30,59 @@ namespace BookBazaar.Controllers
             // If the model state is valid, save the order
             if (ModelState.IsValid)
             {
-                order.Lines = cart.Lines.ToArray();
+                // Save the order
                 repository.SaveOrder(order);
+
+
+                string domain = "https://localhost:7046/";
+                // Create a new session with the order details
+                var options = new SessionCreateOptions
+                {
+                    SuccessUrl = domain + $"Completed?orderId={order.OrderId}",
+                    CancelUrl = domain + "Cart",
+                    LineItems = new List<SessionLineItemOptions>(),
+                    Mode = "payment",
+                };
+
+                // Add the items in the cart to the session
+                foreach (var item in cart.Lines)
+                {
+                    var sessionListItem = new SessionLineItemOptions()
+                    {
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            UnitAmountDecimal = (long)(item.Book.Price * 100),
+                            Currency = "usd",
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = item.Book.Title,
+
+                            }
+                        },
+                        Quantity = item.Quantity,
+                    };
+                    options.LineItems.Add(sessionListItem);
+                }
+
+                // Create the session
+                SessionService service = new SessionService();
+
+                // This is the session object that will be returned to the client
+                Session session = service.Create(options);
+
+                // Redirect the user to the session URL
+                Response.Headers.Add("Location", session.Url);
+                
+                // Clear the cart
                 cart.Clear();
-                return RedirectToPage("/Completed", new {orderId = order.OrderId});
+
+                // Return a 303 status code
+                return StatusCode(303);   
             }
             else
             {
                 return View();
-            }
+            }            
         }
     }
 }
