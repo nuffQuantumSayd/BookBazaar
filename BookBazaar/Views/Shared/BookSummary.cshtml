@@ -1,7 +1,7 @@
 ﻿@model BookBazaar.Models.Book
 
 
-<div class="card text-center col-sm-4 m-3 p-4" style="width:18rem;">
+@* <div class="card text-center col-sm-4 m-3 p-4" style="width:18rem;">
     <img src="/Images/@Model.Image" class="card-img-top p-1" style="height: 230px" alt="Book Image">
     <div class="card-body">
         <h5 class="card-title poppins-black">@Model.Title</h5>
@@ -16,7 +16,7 @@
         }
         <p class="card-text poppins-regular">@Model.Price.ToString("c")</p>
 
-        @* <a href="#" class="btn btn-primary">Add to Cart</a> *@
+        @* <a href="#" class="btn btn-primary">Add to Cart</a> *@@*
         <!-- Add to cart button -->
         <form id="@Model.Id" asp-page="/Cart" method="post">
             <input type="hidden" asp-for="@Model.Id" />
@@ -33,5 +33,42 @@
         </form>
 
     </div>
+</div> *@
+
+<div class="col-md-6">
+    <div style="height:23rem; background-color:white;" class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <h3 class="mb-0">
+                @Model.Title
+            </h3>
+            <div class="mb-1 text-body-secondary">
+                @Model.Genre
+            </div>
+            <p class="card-text mb-auto">
+                @Model.Description
+            </p>
+            <a asp-action="BookDescription" asp-route-id="@Model.Id">
+                Further Description
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671" />
+                </svg>
+            </a>
+
+            <form id="@Model.Id" asp-page="/Cart" method="post">
+                <input type="hidden" asp-for="@Model.Id" />
+                <input type="hidden" name="returnUrl"
+                       value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                <button type="submit"
+                        class="btn btn-success btn-sm">
+                    Add To Cart
+                </button>
+            </form>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img class="p-1" src="/Images/@Model.Image" />
+        </div>
+        
+    </div>
 </div>
+
 

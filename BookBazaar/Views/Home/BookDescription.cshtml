@@ -1,0 +1,35 @@
+﻿@model BookBazaar.Models.Book
+
+@{
+    ViewData["Title"] = "BookDescription";
+}
+
+<div class="d-container">
+    <div class="book-details">
+        <img class="book-cover" src="/images/@Model.Image" alt="Book Cover">
+        <div>
+            <h2>@Model.Title</h2>
+            <p class="description">ISBN: @Model.ISBN</p>
+            <p class="author">@Model.Author</p>
+            <p class="description">@Model.Description</p>
+            <p class="description">@Model.Genre</p>
+            <p class="description">@Model.Quantity</p>
+            <p class="description">@Model.Price.ToString("c")</p>
+            <form id="@Model.Id" asp-page="/Cart" method="post">
+                <input type="hidden" asp-for="@Model.Id" />
+                <input type="hidden" name="returnUrl"
+                       value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                <button type="submit"
+                        class="btn btn-success btn-sm ">
+                    Add To Cart
+                </button>
+                <a style="display:inline; float:right" class="btn btn-primary btn-sm" asp-action="Index">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
