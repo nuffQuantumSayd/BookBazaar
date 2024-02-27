@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BookBazaar.Data;
 using BookBazaar.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookBazaar.Controllers
 {
+    // restrict to admin 
+    [Authorize(Roles = "Administrator")]
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -105,7 +108,20 @@ namespace BookBazaar.Controllers
             {
                 return NotFound();
             }
-            return View(book);
+
+            EditBookViewModel bookModel = new EditBookViewModel
+            {
+                Id = book.Id,
+                Title = book.Title,
+                ISBN = book.ISBN,
+                Author = book.Author,
+                Description = book.Description,
+                Genre = book.Genre,
+                Quantity = book.Quantity,
+                Price = book.Price,
+            };
+
+            return View(bookModel);
         }
 
         // POST: Books/Edit/5
@@ -113,34 +129,37 @@ namespace BookBazaar.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ISBN,Author,Description,Genre,Quantity,Price,Image")] Book book)
+        public async Task<IActionResult> Edit(EditBookViewModel bookModel)
         {
-            if (id != book.Id)
-            {
-                return NotFound();
-            }
+            // Generate a unique name for the image
+            string fileName = Guid.NewGuid().ToString();
+            fileName += Path.GetExtension(bookModel.BookPhoto.FileName);
+
+            // Save file to file system
+            string uploadPath = Path.Combine(_environment.WebRootPath, "Images", fileName);
+            using Stream fileStream = new FileStream(uploadPath, FileMode.Create);
+            await bookModel.BookPhoto.CopyToAsync(fileStream);
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(book);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BookExists(book.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                Book? book = _context.Books.Find(bookModel.Id);
+
+                book.Title = bookModel.Title;
+                book.ISBN = bookModel.ISBN;
+                book.Author = bookModel.Author;
+                book.Description = bookModel.Description;
+                book.Genre = bookModel.Genre;
+                book.Quantity = bookModel.Quantity;
+                book.Price = bookModel.Price;
+                book.Image = fileName;
+
+
+                _context.Update(book);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(book);
+            
+            return View(bookModel);
         }
 
         // GET: Books/Delete/5
