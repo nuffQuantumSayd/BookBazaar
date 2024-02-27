@@ -3,7 +3,7 @@
 @{
 }
 <h2>Your cart</h2>
-<table class="table table-bordered table-striped">
+<table class="container table-striped">
     <thead>
         <tr>
             <th>Quantity</th>
@@ -41,7 +41,7 @@
         }
     </tbody>
     <tfoot>
-        <tr>
+        <tr class="total-row">
             <td colspan="3" class="text-right">Total:</td>
             <td class="text-right">
                 @Model?.Cart?.ComputeTotalValue().ToString("c")
