@@ -6,19 +6,32 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<a asp-page="/Cart">Go to Cart</a>
-<br />
-<a asp-controller="Books" asp-action="Index">Go to Books</a>
+
+@* <a asp-controller="Books" asp-action="Index">Go to Books</a> *@
+
+<div>
+    <form asp-controller="Home" asp-action="Index" method="get">
+        <div class="poppins-regular search-field">
+            <input class="search-bar" type="text" placeholder="Search" name="SearchString" />
+            <input class="search-btn" class="" type="submit" value="Search" />
+            <div class="cart-icon">
+                <a asp-page="/Cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-cart" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0
+                    0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0
+                    0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
 
 <!-- Search form -->
-<form asp-controller="Home" asp-action="Index" method="get">
-    <p>
-        Title: <input type="text" name="SearchString" />
-        <input type="submit" value="Search"/>
-    </p>
-</form>
 
-<div class="row">
+
+<div class="row mb-2">
     @foreach (var b in Model)
     {
         <partial name="BookSummary" model="b" />
