@@ -6,6 +6,12 @@
 
 <h1>Index</h1>
 
+<form asp-controller="Books" asp-action="Index" method="get">
+    <input class="search-bar" type="text" placeholder="Search" name="SearchString" />
+    <input class="search-btn" class="" type="submit" value="Search" />
+</form>
+
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
