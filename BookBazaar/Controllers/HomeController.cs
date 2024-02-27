@@ -63,6 +63,24 @@ namespace BookBazaar.Controllers
             return View(pagedBookList);
         }
 
+        public IActionResult BookDescription(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            // return the book with the given id
+            var book = _context.Books
+                .FirstOrDefault(b => b.Id == id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book); 
+        }
+
         public IActionResult Privacy()
         {
             return View();
