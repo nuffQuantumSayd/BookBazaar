@@ -8,8 +8,8 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+ul > li {
+    text-decoration: none;
 }
 
 html {
@@ -18,16 +18,280 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
-    background-color: lightgray;
+    background-color: #f5f5f5;
 }
+
+/******************
+* Header *
+ ******************/
+
+
+
+header {
+    padding: 1.84375rem 1.84375rem;
+    margin-bottom: 0;
+}
+
+.header_menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+}
+
+.header_menu_logo {
+    padding-left: 3rem;
+}
+
+.header_menu_links {
+}
+
+.header_menu_pages a {
+    color: black !important;
+    text-decoration: none;
+    padding-left: 3rem;
+    padding-right: 6rem;
+}
+
+.header_menu_icons {
+	display: flex;
+	align-items: center;
+}
+
+.header_menu_icons > a {
+    padding-right: 3rem;
+    color: black !important;
+    text-decoration: none;
+}
+
+/******************
+    Banner
+*/
+
+.banner > img{
+    width: 100%;
+    height: auto;
+}
+
+.banner_2 > img {
+    width: 100%;
+    height: auto;
+}
+
+/******************
+    Product
+*/
+.product_title {
+    text-align: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    color: #3a3a3a;
+}
+
+.product_grid_container {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    margin-top: 4rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-bottom: 4rem;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 2rem;
+}
+
+.product_grid_item {
+    display: flex;
+    flex-direction: column;
+    height: 30rem;
+    width: 17.8125rem;
+    background-color: #f4f5f7;
+    margin: 2rem 2rem 2rem 2rem;
+}
+
+.product_grid_item_image img {
+    margin-top: 2rem;
+    height: 15rem;
+}
+
+.product_grid_item form {
+    position: absolute;
+    bottom: 0px;
+}
+
+.product_grid_item_image {
+    display: flex;
+    justify-content: center;
+    background: #fff;
+}
+
+.product_grid_item_description {
+    background: #fff;
+    height: 100%;
+    padding: 1rem;
+}
+
+.product_grid_item_description_name {
+    color: #3a3a3a !important;
+}
+
+.product_grid_item_description_name a {
+    position:absolute;
+    bottom: 3.3rem;
+}
+
+.product_grid_item_description_price {
+    position: absolute;
+    bottom: 2rem;
+}
+
+.product_grid_item_cart_button {
+    color: #b88e2f;
+    background-color: #ffffff;
+    border: 1px solid #b88e2f;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.product_show_more_button {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+.product_show_more_button button {
+    color: #b88e2f;
+    background-color: #ffffff;
+    border: 1px solid #b88e2f;
+    text-decoration: none;
+    width: 15.3125rem;
+    height: 3rem;
+    align-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.pagination_container {
+	display: flex;
+    justify-content:center;
+	width: 100%;
+
+}
+/******************
+	Footer
+*/
+.footer_container {
+    padding: 10% 10%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer_business_info {
+    padding: 1rem 1rem;
+}
+
+.footer_links {
+    padding: 1rem 1rem;
+}
+
+.footer_links a {
+    color: black !important;
+	text-decoration: none;
+}
+
+.footer_help {
+    padding: 1rem 1rem;
+}
+
+.footer_help a {
+	color: black !important;
+	text-decoration: none;
+}
+
+.footer_newsletter {
+    padding: 1rem 1rem;
+}
+
+.newsletter_form input {
+    border: none;
+    background-color: #f5f5f5;
+    outline: none;
+    -ms-text-underline-position: under;
+}
+
+.newsletter_form button {
+    border: none;
+    background-color: #f5f5f5;
+    outline: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.footer_copyright {
+    padding-left: 10%;
+}
+
+/******************
+	Media Queries
+*/
+
+@media only screen and (max-width: 1500px) {
+    .product_grid_container {
+		grid-template-columns: auto auto auto;
+        
+	}
+
+    .product_grid_item_description_name a {
+        position: relative;
+        bottom: 3px;
+    }
+
+    .product_grid_item_description_price {
+        position: relative;
+        bottom: 0px;
+    }
+
+    .product_grid_item form {
+        position: relative;
+        bottom: 0px;
+    }
+    
+}
+@media only screen and (max-width: 1230px) {
+    .header_menu_pages a {
+        padding: 1rem;
+    }
+}
+
+@media only screen and (max-width: 1120px) {
+    .product_grid_container {
+        grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+	.header_menu_icons {
+        flex-direction: column;
+        padding-top: 3rem;
+	}
+    header {
+        margin-bottom: 3rem;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .product_grid_container {
+        grid-template-columns: auto;
+    }
+}
+
+
 
 .truncate {
     white-space:inherit;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 7;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 /*    height: 10rem;*/
 }
@@ -39,36 +303,30 @@ body {
     display: inline;
 }
 
-.search-field{
-    padding-bottom: 4rem;
+.search-field {
+	display: flex;
+	justify-content: center; 
 }
 
 .search-bar {
-    display: inline;
-    align-items: center;
-    width: 40%;
-    border: 2px solid #ccc;
-    border-radius: 20px;
-    padding: 15px 32px;
+    margin-top: 2rem;
+    margin-right: 1rem;
+    outline: none;
+    border: none;
+    width: 30%;
 }
 
 .search-btn {
-    display: inline;
-    background-color: #4CAF50; /* Green */
+    margin-top: 2rem;
     border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
+    background-color: #f5f5f5;
+    outline: none;
     cursor: pointer;
-    border-radius: 20px;
+    text-decoration: underline;
 }
 
 .search-btn:hover{
-    background-color: #45a049;
+
 }
 
 table {
