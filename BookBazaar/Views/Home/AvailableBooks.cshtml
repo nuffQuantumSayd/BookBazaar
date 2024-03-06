@@ -1,0 +1,58 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model PagedList<BookBazaar.Models.Book>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div>
+    <form asp-controller="Home" asp-action="AvailableBooks" method="get">
+        <div class="poppins-regular search-field">
+            <input class="search-bar" type="text" placeholder="Search" name="SearchString" />
+            <input class="search-btn" class="" type="submit" value="Search" />
+        </div>
+    </form>
+</div>
+
+<div class="product_grid_container">
+    @foreach (var b in Model)
+    {
+        <partial name="BookSummary" model="b" />
+    }
+</div>
+
+<br>
+
+
+
+<!-- Pagination -->
+<div class="pagination_container">
+    <div class="text-center">
+        <ul class="pagination">
+            <!-- First page -->
+            <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("AvailableBooks", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">First</a>
+            </li>
+            <!-- Previous page -->
+            <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("AvailableBooks", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">Previous</a>
+            </li>
+            <!-- Page numbers -->
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                <li class="page-item @(Model.PageNumber == i ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("AvailableBooks", new { page = i, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">@i</a>
+                </li>
+            }
+            <!-- Next page -->
+            <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("AvailableBooks", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">Next</a>
+            </li>
+            <!-- Last page -->
+            <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("AvailableBooks", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">Last</a>
+            </li>
+        </ul>
+    </div>
+</div>
