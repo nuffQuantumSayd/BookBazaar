@@ -20,9 +20,8 @@ namespace BookBazaar.Controllers
             _context = context;
         }
 
-        // GET: Books
-        public IActionResult Index(string currentFilter, string searchString, int? page)
-        {   
+        public IActionResult AvailableBooks(string currentFilter, string searchString, int? page)
+        {
             // If the database is empty, return a problem
             if (_context.Books == null)
             {
@@ -31,10 +30,10 @@ namespace BookBazaar.Controllers
 
             // If the search string is empty, return all books
             IQueryable<Book> books = from b in _context.Books
-                        select b;
+                                     select b;
 
             // If the search string is not empty, return books that contain the search string
-            if(searchString != null)
+            if (searchString != null)
             {
                 page = 1;
             }
@@ -61,6 +60,22 @@ namespace BookBazaar.Controllers
             IPagedList<Book> pagedBookList = books.ToPagedList(pageNumber, pageSize);
 
             return View(pagedBookList);
+        }
+
+        // GET: Books
+        public IActionResult Index()
+        {   
+            // If the database is empty, return a problem
+            if (_context.Books == null)
+            {
+                return Problem("The database is empty");
+            }
+
+            IQueryable<Book> books = from b in _context.Books
+                                     where b.Id < 5
+                                     select b;
+
+            return View(books);
         }
 
         public IActionResult BookDescription(int? id)
