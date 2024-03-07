@@ -147,6 +147,7 @@ header {
 }
 
 .product_grid_item_cart_button {
+    text-decoration: none;
     color: #b88e2f;
     background-color: #ffffff;
     border: 1px solid #b88e2f;
@@ -215,7 +216,6 @@ header {
     border: none;
     background-color: #f5f5f5;
     outline: none;
-    -ms-text-underline-position: under;
 }
 
 .newsletter_form button {
